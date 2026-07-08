@@ -31,7 +31,7 @@ curl -O https://raw.githubusercontent.com/jcyh6923/TG-SignPulse/main/docker-comp
 docker compose -f docker-compose.hub.yml up -d
 ```
 
-启动后访问 `http://<服务器IP>:8080`。默认用户名 `admin`，首次启动的随机密码会打印在日志中（`docker logs tg-signpulse` 或 `docker compose logs -f`）。端口、持久化、代理与升级等完整说明见 **[DEPLOY.md](DEPLOY.md)**。
+启动后访问 `http://<服务器IP>:8080`。默认用户名 `admin`。若未设置 `ADMIN_PASSWORD`，系统会随机生成首次密码并写入数据卷内的 `/data/.admin_bootstrap_password` 文件——用 `docker exec tg-signpulse cat /data/.admin_bootstrap_password` 读取（挂载后也可在宿主机 `cat data/.admin_bootstrap_password`）。想省事可在启动时加 `-e ADMIN_PASSWORD='你的密码'` 直接指定。端口、持久化、代理与升级等完整说明见 **[DEPLOY.md](DEPLOY.md)**。
 
 ---
 
@@ -72,7 +72,7 @@ cd TG-SignPulse
 docker compose up -d --build
 ```
 
-启动后访问 `http://<服务器IP>:8080`。默认用户名 `admin`，首次启动的随机密码会打印在 `docker compose logs -f` 中，也可在 `docker-compose.yml` 里设置 `ADMIN_PASSWORD` 自定义。
+启动后访问 `http://<服务器IP>:8080`。默认用户名 `admin`。若未设置 `ADMIN_PASSWORD`，系统会随机生成首次密码并写入 `/data/.admin_bootstrap_password`（宿主机路径 `./data/.admin_bootstrap_password`），用 `cat data/.admin_bootstrap_password` 读取；也可在 `docker-compose.yml` 里设置 `ADMIN_PASSWORD` 自定义。
 
 完整说明（端口修改、数据持久化、代理配置、升级等）见 **[DEPLOY.md](DEPLOY.md)**。
 

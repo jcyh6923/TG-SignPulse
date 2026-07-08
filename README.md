@@ -31,7 +31,7 @@ curl -O https://raw.githubusercontent.com/jcyh6923/TG-SignPulse/main/docker-comp
 docker compose -f docker-compose.hub.yml up -d
 ```
 
-Then open `http://<server-ip>:8080`. Default username is `admin`; the first-run password is printed in the logs (`docker logs tg-signpulse` or `docker compose logs -f`). See **[DEPLOY.md](DEPLOY.md)** for ports, persistence, proxies and upgrades.
+Then open `http://<server-ip>:8080`. Default username is `admin`. If you don't set `ADMIN_PASSWORD`, a random first-run password is generated and saved to `/data/.admin_bootstrap_password` inside the data volume — read it with `docker exec tg-signpulse cat /data/.admin_bootstrap_password` (or `cat data/.admin_bootstrap_password` on the host). To skip this, pass `-e ADMIN_PASSWORD='your-password'` when starting. See **[DEPLOY.md](DEPLOY.md)** for ports, persistence, proxies and upgrades.
 
 ---
 
@@ -72,7 +72,7 @@ cd TG-SignPulse
 docker compose up -d --build
 ```
 
-Then open `http://<server-ip>:8080`. The default username is `admin`; the randomly generated first-run password is printed in `docker compose logs -f`. You can also set `ADMIN_PASSWORD` in `docker-compose.yml` to define your own.
+Then open `http://<server-ip>:8080`. The default username is `admin`. If you don't set `ADMIN_PASSWORD`, a random first-run password is generated and saved to `/data/.admin_bootstrap_password` (host path `./data/.admin_bootstrap_password`). Read it with `cat data/.admin_bootstrap_password`, or set `ADMIN_PASSWORD` in `docker-compose.yml` to define your own.
 
 See **[DEPLOY.md](DEPLOY.md)** for full details (changing ports, data persistence, proxy configuration, upgrades, etc.).
 

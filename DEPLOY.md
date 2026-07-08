@@ -29,7 +29,7 @@ curl -O https://raw.githubusercontent.com/jcyh6923/TG-SignPulse/main/docker-comp
 docker compose -f docker-compose.hub.yml up -d
 ```
 
-启动后访问 `http://<服务器IP>:8080`，默认用户名 `admin`，首次密码见 `docker logs tg-signpulse`。
+启动后访问 `http://<服务器IP>:8080`，默认用户名 `admin`，首次随机密码写入 `/data/.admin_bootstrap_password`，用 `docker exec tg-signpulse cat /data/.admin_bootstrap_password` 读取（或挂载后在宿主机 `cat data/.admin_bootstrap_password`）。
 
 > 注：镜像首次发布需等 GitHub Actions 跑完一次构建（见仓库 Actions 页面）。若镜像为私有，`docker run` 前需先 `docker login ghcr.io`。
 
@@ -47,7 +47,9 @@ cd TG-SignPulse
 # 2. 构建并后台启动
 docker compose up -d --build
 
-# 3. 查看日志（首次启动会打印管理员密码）
+# 3. 读取首次自动生成的管理员密码（未设置 ADMIN_PASSWORD 时）
+cat data/.admin_bootstrap_password
+# 查看实时日志
 docker compose logs -f
 ```
 
@@ -56,7 +58,7 @@ docker compose logs -f
 ## 管理员账号
 
 - 默认用户名：`admin`
-- 密码：若未设置 `ADMIN_PASSWORD`，首次启动会自动生成一个随机密码，写入 `./data/.admin_bootstrap_password`，也会在日志里打印。
+- 密码：若未设置 `ADMIN_PASSWORD`，首次启动会自动生成一个随机密码，写入 `./data/.admin_bootstrap_password`（用 `cat data/.admin_bootstrap_password` 读取）。日志里只会提示去该文件读取，不会打印密码本身。
 - 建议在 `docker-compose.yml` 里取消注释并设置 `ADMIN_PASSWORD`，用自己的密码：
 
 ```yaml
