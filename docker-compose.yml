@@ -1,0 +1,28 @@
+services:
+  signpulse:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tg-signpulse:latest
+    container_name: tg-signpulse
+    restart: unless-stopped
+    ports:
+      # 左边是宿主机端口，可自行修改；右边 8080 是容器内端口，勿改
+      - "8080:8080"
+    environment:
+      # 时区
+      TZ: Asia/Hong_Kong
+      # 管理员账号密码（首次启动自动创建，建议修改）
+      # ADMIN_USERNAME: admin
+      # ADMIN_PASSWORD: change_me
+      # 应用密钥（留空则自动生成并持久化到 /data）
+      # APP_SECRET_KEY: your_secret_key_here
+    volumes:
+      # 持久化数据：数据库、会话、日志、配置
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

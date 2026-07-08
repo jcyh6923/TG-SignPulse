@@ -1,0 +1,36 @@
+# 版本控制
+.git
+.gitignore
+
+# 前端依赖与产物（在镜像内重新构建）
+frontend/node_modules
+frontend/dist
+node_modules
+
+# Python 缓存与虚拟环境
+__pycache__
+*.pyc
+*.pyo
+.venv
+venv
+*.egg-info
+.tox
+.pytest_cache
+.ruff_cache
+
+# 运行时数据（绝不打进镜像）
+data
+*.session
+*.session_string
+.openai_config.json
+.global_settings.json
+.env
+
+# 文档站点
+docs
+.kiro
+
+# 编辑器 / 系统
+.vscode
+.idea
+.DS_Store

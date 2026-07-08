@@ -10,6 +10,9 @@
 
 ---
 
+> **📌 This is a forked / modified version**
+> Based on the original [TG-SignPulse](https://github.com/akasls/TG-SignPulse) (original author [Amchii](https://github.com/amchii), BSD-3-Clause). The upstream project is archived; this fork adds one-command Docker deployment. Original copyright and license: see [LICENSE](LICENSE).
+
 ## About
 
 TG-SignPulse is an **AI Vibe Coding learning project** created to explore and practice the integration of the following technology stacks:
@@ -31,6 +34,22 @@ This project was built as a hands-on exercise during the author's exploration of
 > - No pre-built images or distributions of any kind are provided
 > - No new Issues or Pull Requests will be accepted
 > - The code is available solely for technical learning reference
+
+---
+
+## Docker Deployment (added in this fork)
+
+This fork adds one-command Docker deployment on top of the original project:
+
+```bash
+git clone https://github.com/jcyh6923/TG-SignPulse.git
+cd TG-SignPulse
+docker compose up -d --build
+```
+
+Then open `http://<server-ip>:8080`. The default username is `admin`; the randomly generated first-run password is printed in `docker compose logs -f`. You can also set `ADMIN_PASSWORD` in `docker-compose.yml` to define your own.
+
+See **[DEPLOY.md](DEPLOY.md)** for full details (changing ports, data persistence, proxy configuration, upgrades, etc.).
 
 ---
 
