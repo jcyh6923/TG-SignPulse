@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/jcyh6923/TG-SignPulse/actions/workflows/docker-publish.yml"><img src="https://github.com/jcyh6923/TG-SignPulse/actions/workflows/docker-publish.yml/badge.svg" alt="Build and Publish Docker Image"></a>
   <a href="https://github.com/jcyh6923/TG-SignPulse/pkgs/container/tg-signpulse"><img src="https://img.shields.io/badge/ghcr.io-tg--signpulse-2496ED?logo=docker&logoColor=white" alt="GHCR Image"></a>
+  <a href="https://github.com/jcyh6923/TG-SignPulse/pkgs/container/tg-signpulse"><img src="https://img.shields.io/badge/arch-amd64%20%7C%20arm64-blue?logo=docker&logoColor=white" alt="Multi-arch"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-BSD--3--Clause-green" alt="License"></a>
 </p>
 
