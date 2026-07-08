@@ -1,10 +1,16 @@
 name: Build and Publish Docker Image
 
 # 触发条件：推送到 main、打 tag（如 v1.0.0）、或手动触发
+# 纯文档改动（*.md / LICENSE 等）不触发构建，避免空跑 arm64 模拟编译
 on:
   push:
     branches: [ "main" ]
     tags: [ "v*" ]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - '.gitignore'
+      - 'docs/**'
   workflow_dispatch:
 
 env:
