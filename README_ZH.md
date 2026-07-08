@@ -18,7 +18,7 @@
 
 ## 🚀 一键部署
 
-预构建镜像（linux/amd64）已发布到 GitHub Container Registry。无需克隆、无需本地构建，直接运行：
+预构建多架构镜像（linux/amd64 + linux/arm64）已发布到 GitHub Container Registry。无需克隆、无需本地构建，直接运行：
 
 ```bash
 docker run -d --name tg-signpulse -p 8080:8080 -v $(pwd)/data:/data ghcr.io/jcyh6923/tg-signpulse:latest
