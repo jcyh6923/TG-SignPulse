@@ -7,6 +7,36 @@
 - 已安装 Docker 与 Docker Compose（`docker compose version` 能正常输出即可）
 - 一台能访问 Telegram、且 AI 接口可用的服务器
 
+## 方式一：直接拉取镜像（推荐，一键部署）
+
+镜像由 GitHub Actions 自动构建并发布到 GHCR，无需在服务器上编译。
+
+```bash
+# 一键运行（自动拉取镜像）
+docker run -d \
+  --name tg-signpulse \
+  -p 8080:8080 \
+  -v $(pwd)/data:/data \
+  -e TZ=Asia/Hong_Kong \
+  --restart unless-stopped \
+  ghcr.io/jcyh6923/tg-signpulse:latest
+```
+
+或使用 compose（拉取版）：
+
+```bash
+curl -O https://raw.githubusercontent.com/jcyh6923/TG-SignPulse/main/docker-compose.hub.yml
+docker compose -f docker-compose.hub.yml up -d
+```
+
+启动后访问 `http://<服务器IP>:8080`，默认用户名 `admin`，首次密码见 `docker logs tg-signpulse`。
+
+> 注：镜像首次发布需等 GitHub Actions 跑完一次构建（见仓库 Actions 页面）。若镜像为私有，`docker run` 前需先 `docker login ghcr.io`。
+
+---
+
+## 方式二：源码构建
+
 ## 快速开始
 
 ```bash

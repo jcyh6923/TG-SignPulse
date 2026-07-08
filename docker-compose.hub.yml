@@ -1,0 +1,27 @@
+# ============================================================
+# 一键部署版：直接拉取已构建好的镜像，无需本地 build
+# 使用方法：
+#   docker compose -f docker-compose.hub.yml up -d
+# ============================================================
+services:
+  signpulse:
+    image: ghcr.io/jcyh6923/tg-signpulse:latest
+    container_name: tg-signpulse
+    restart: unless-stopped
+    ports:
+      # 左边宿主机端口可改，右边 8080 勿改
+      - "8080:8080"
+    environment:
+      TZ: Asia/Hong_Kong
+      # 管理员密码（不设则首次启动生成随机密码，见 docker logs）
+      # ADMIN_PASSWORD: change_me
+      # 应用密钥（留空自动生成并持久化到 /data）
+      # APP_SECRET_KEY: your_secret_key_here
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health').status==200 else 1)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

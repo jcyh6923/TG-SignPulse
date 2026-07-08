@@ -38,8 +38,16 @@ COPY pyproject.toml README.md ./
 COPY tg_signer/ ./tg_signer/
 
 # 安装项目依赖（含 tg-signer 本体）
-# socks 代理支持: httpx[socks] 提供 socksio
-RUN pip install ".[speedup]" "httpx[socks]"
+# - [speedup] 含 tgcrypto，是 C 扩展，slim 镜像默认无编译器；
+#   这里临时装 gcc 等编译工具，装完立即清理，保证一定能编译成功且不留体积。
+# - httpx[socks] 提供 socksio，用于 socks 代理支持。
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends gcc build-essential; \
+    pip install ".[speedup]" "httpx[socks]"; \
+    apt-get purge -y gcc build-essential; \
+    apt-get autoremove -y; \
+    rm -rf /var/lib/apt/lists/*
 
 # 拷贝后端源码
 COPY backend/ ./backend/
