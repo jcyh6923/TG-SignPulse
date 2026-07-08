@@ -5,8 +5,33 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/jcyh6923/TG-SignPulse/actions/workflows/docker-publish.yml"><img src="https://github.com/jcyh6923/TG-SignPulse/actions/workflows/docker-publish.yml/badge.svg" alt="Build and Publish Docker Image"></a>
+  <a href="https://github.com/jcyh6923/TG-SignPulse/pkgs/container/tg-signpulse"><img src="https://img.shields.io/badge/ghcr.io-tg--signpulse-2496ED?logo=docker&logoColor=white" alt="GHCR Image"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-BSD--3--Clause-green" alt="License"></a>
+</p>
+
+<p align="center">
   <a href="README_ZH.md">中文说明</a>
 </p>
+
+---
+
+## 🚀 One-Click Deploy
+
+A pre-built image (linux/amd64) is published to GitHub Container Registry. No cloning, no build step — just run:
+
+```bash
+docker run -d --name tg-signpulse -p 8080:8080 -v $(pwd)/data:/data ghcr.io/jcyh6923/tg-signpulse:latest
+```
+
+Or with Docker Compose:
+
+```bash
+curl -O https://raw.githubusercontent.com/jcyh6923/TG-SignPulse/main/docker-compose.hub.yml
+docker compose -f docker-compose.hub.yml up -d
+```
+
+Then open `http://<server-ip>:8080`. Default username is `admin`; the first-run password is printed in the logs (`docker logs tg-signpulse` or `docker compose logs -f`). See **[DEPLOY.md](DEPLOY.md)** for ports, persistence, proxies and upgrades.
 
 ---
 
@@ -31,7 +56,7 @@ This project was built as a hands-on exercise during the author's exploration of
 
 > 🚫 **This project is discontinued and will not receive further updates.**
 >
-> - No pre-built images or distributions of any kind are provided
+> - A pre-built Docker image is published to GHCR for convenience (see [One-Click Deploy](#-one-click-deploy)), but the source code itself receives no further updates
 > - No new Issues or Pull Requests will be accepted
 > - The code is available solely for technical learning reference
 
