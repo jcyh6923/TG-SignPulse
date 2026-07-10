@@ -22,7 +22,10 @@
 A pre-built multi-arch image (linux/amd64 + linux/arm64) is published to GitHub Container Registry. No cloning, no build step — just run:
 
 ```bash
-docker run -d --name tg-signpulse -p 8760:8080 \ -e ADMIN_PASSWORD='填你的密码' \ -v /opt/tg-signpulse/data:/data \ ghcr.io/jcyh6923/tg-signpulse:latest
+docker run -d --name tg-signpulse -p 8760:8080 \
+  -e ADMIN_PASSWORD='填你的密码' \
+  -v /opt/tg-signpulse/data:/data \
+  ghcr.io/jcyh6923/tg-signpulse:latest
 ```
 
 Or with Docker Compose:
